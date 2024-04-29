@@ -25,6 +25,7 @@ app.get("/usuarios", async (req, res) => {
     }
 });
 
+// endpoint para editar usuario
 app.put("/usuario", async (req, res) => {
     try {
         const { id } = req.query;
