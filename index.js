@@ -1,6 +1,6 @@
 const express = require("express");
 const pool = require('./dbConfig');
-const { getUsuarios } = require("./consultas");
+const { getUsuarios, editUsuario } = require("./consultas");
 const app = express();
 const PORT = 3000;
 app.use(express.json());
@@ -22,5 +22,17 @@ app.get("/usuarios", async (req, res) => {
         res.json(resultado);
     } catch (error) {
         console.error("Error en get usuarios", error);         
+    }
+});
+
+app.put("/usuario", async (req, res) => {
+    try {
+        const { id } = req.query;
+        const {name, balance} = req.body;
+        const resultado = await editUsuario(id, name, balance);
+        res.json(resultado);
+        
+    } catch (error) {
+        console.error("Error en editando usuario", error);   
     }
 });
