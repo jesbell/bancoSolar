@@ -1,14 +1,14 @@
 const { Pool } = require("pg");
 
 // agrega tus datos de conexión
-const usuario_name = "";
-const pass_usuario = "";
+const name = "";
+const pass = "";
 
 const pool = new Pool({
-    user: usuario_name,
+    user: name,
     host: "localhost",
-    password: pass_usuario,
-    database: "",
+    password: pass,
+    database: "bancosolar",
     port: 5432,
 });
 
