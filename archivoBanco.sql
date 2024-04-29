@@ -26,7 +26,7 @@ CREATE TABLE transferencias (
 -- Opcionalmente puedes insertar estos usuarios con sus montos,
 -- modificarlos o crear otros distintos: 
 INSERT INTO usuarios (nombre, balance) VALUES
-('Juan', 1000.50),
-('María', 750.25),
-('Carlos', 300.75),
-('Ana', 1500.00);
+('Juan', 1000),
+('María', 75000),
+('Carlos', 3000),
+('Ana', 1500);
