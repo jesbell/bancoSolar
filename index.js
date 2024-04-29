@@ -1,6 +1,6 @@
 const express = require("express");
 const pool = require('./dbConfig');
-const { getUsuarios, editUsuario, delUsuario } = require("./consultas");
+const { getUsuarios, editUsuario, delUsuario, addUsuario } = require("./consultas");
 const app = express();
 const PORT = 3000;
 app.use(express.json());
@@ -48,4 +48,15 @@ app.delete("/usuario", async (req, res) => {
         console.error("Error al eliminar usuario", error);
     }   
 
+});
+
+// endpoint agregar usuario
+app.post("/usuario", async (req, res) => {
+    const { nombre, balance } = req.body;
+    try {
+        const resultado = await addUsuario(nombre, balance);
+        res.json(resultado);
+    } catch (error) {
+        console.error("Error al agregar usuario", error);
+    }
 });

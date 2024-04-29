@@ -29,5 +29,17 @@ const delUsuario = async (id) => {
     
 }
 
+const addUsuario = async (nombre, balance) => {
+    try {
+        const query = 'INSERT INTO usuarios (nombre, balance) VALUES ($1, $2)';
+        const values = [nombre, balance];
+        const result = await pool.query(query, values);
+        return result.rows;
+    } catch (error) {
+        console.error("Error al agregar usuario a la base de datos", error); 
+    }
+    
+}
 
-module.exports = { getUsuarios, editUsuario, delUsuario };
+
+module.exports = { getUsuarios, editUsuario, delUsuario, addUsuario};
