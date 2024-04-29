@@ -1,7 +1,7 @@
 const express = require("express");
 const pool = require('./dbConfig');
-/* const {  } = require("./consultas");
- */const app = express();
+const { getUsuarios } = require("./consultas");
+const app = express();
 const PORT = 3000;
 app.use(express.json());
 
@@ -14,3 +14,15 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
+
+// endpoint para obtener todos los usuarios
+app.get("/usuarios", async (req, res) => {
+    try {
+        const resultado = await getUsuarios()       ;
+        //console.log(resultado);
+        res.json(resultado);
+    } catch (error) {
+        console.error("Error en get usuarios", error);         
+    }
+
+})
