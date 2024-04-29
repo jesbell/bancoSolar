@@ -1,8 +1,8 @@
 const { Pool } = require("pg");
 
 // agrega tus datos de conexión
-const name = "jesabeldev";
-const pass = "z";
+const name = "";
+const pass = "";
 
 const pool = new Pool({
     user: name,
