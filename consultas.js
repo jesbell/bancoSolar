@@ -18,5 +18,16 @@ const editUsuario = async (id, name, balance) => {
     
 }
 
+const delUsuario = async (id) => {
+    try {
+        const result = await pool.query('DELETE FROM usuarios WHERE id = $1', [id]);
+        return result.rows;
+        
+    } catch (error) {
+        console.error("Error al actualizar usuario", error); 
+    }
+    
+}
 
-module.exports = { getUsuarios, editUsuario };
+
+module.exports = { getUsuarios, editUsuario, delUsuario };

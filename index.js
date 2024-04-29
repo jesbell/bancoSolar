@@ -1,6 +1,6 @@
 const express = require("express");
 const pool = require('./dbConfig');
-const { getUsuarios, editUsuario } = require("./consultas");
+const { getUsuarios, editUsuario, delUsuario } = require("./consultas");
 const app = express();
 const PORT = 3000;
 app.use(express.json());
@@ -36,4 +36,16 @@ app.put("/usuario", async (req, res) => {
     } catch (error) {
         console.error("Error en editando usuario", error);   
     }
+});
+
+// eliminar usuario por id
+app.delete("/usuario", async (req, res) => {
+    try {
+        const { id } = req.query;
+        const resultado = await delUsuario(id);
+        res.json(resultado);
+    } catch (error) {
+        console.error("Error al eliminar usuario", error);
+    }   
+
 });
