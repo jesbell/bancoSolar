@@ -22,3 +22,11 @@ CREATE TABLE transferencias (
     FOREIGN KEY (emisor) REFERENCES usuarios(id), 
     FOREIGN KEY (receptor) REFERENCES usuarios(id)
     );
+
+-- Opcionalmente puedes insertar estos usuarios con sus montos,
+-- modificarlos o crear otros distintos: 
+INSERT INTO usuarios (nombre, balance) VALUES
+('Juan', 1000.50),
+('María', 750.25),
+('Carlos', 300.75),
+('Ana', 1500.00);
