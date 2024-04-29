@@ -19,10 +19,8 @@ app.get("/", (req, res) => {
 app.get("/usuarios", async (req, res) => {
     try {
         const resultado = await getUsuarios()       ;
-        //console.log(resultado);
         res.json(resultado);
     } catch (error) {
         console.error("Error en get usuarios", error);         
     }
-
-})
+});
