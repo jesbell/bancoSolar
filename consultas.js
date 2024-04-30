@@ -2,8 +2,13 @@ const pool = require('./dbConfig');
 
 
 const getUsuarios = async () => {
-    const result = await pool.query('SELECT * FROM usuarios');
-    return result.rows;
+    try {
+        const result = await pool.query('SELECT * FROM usuarios');
+        return result.rows;
+    } catch (error) {
+        console.error("Error al consultar tabla de usuarios", error);
+    }
+    
 };
 
 const editUsuario = async (id, name, balance) => {
@@ -74,14 +79,18 @@ const transfiere = async (emisor, receptor, monto) => {
 }
 
 const getTransferencias = async () => {
-    const result = await pool.query({
-        text: `SELECT u.nombre as emisor, u2.nombre as receptor, t.monto , t.fecha 
-        FROM transferencias t
-        JOIN usuarios u ON t.emisor = u.id
-        JOIN usuarios u2 ON t.receptor = u2.id;`,
-        rowMode: "array"        
-    });
-    return result.rows;
+    try {
+        const result = await pool.query({
+            text: `SELECT u.nombre as emisor, u2.nombre as receptor, t.monto , t.fecha 
+            FROM transferencias t
+            JOIN usuarios u ON t.emisor = u.id
+            JOIN usuarios u2 ON t.receptor = u2.id;`,
+            rowMode: "array"        
+        });
+        return result.rows;        
+    } catch (error) {
+        console.error("Error al consultar transferencias", error); 
+    }  
 };
 
 module.exports = { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere, getTransferencias};
