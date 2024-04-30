@@ -236,6 +236,7 @@
 
   $("form:last").submit(async (e) => {
     e.preventDefault();
+    /* Se modifica emisor y receptor */
     let emisor = Number($("#emisor").val());
     let receptor = Number($("#receptor").val());
     let monto = Number($("#monto").val());
@@ -244,6 +245,7 @@
       return false;
     }
     try {
+      /* se agrega headers */
       const response = await fetch("http://localhost:3000/transferencia", {
         method: "post",
         headers: {
@@ -302,6 +304,7 @@
     const { data } = await axios.get("http://localhost:3000/transferencias");
     $(".transferencias").html("");
 
+    /* Se corrigen los indices de t */
     data.forEach((t) => {
       $(".transferencias").append(`
        <tr>
@@ -316,7 +319,7 @@
 
   getUsuarios();
   getTransferencias();
-
+/* Se corrige formato de la hora */
   const formatDate = (date) => {
     const dateTimeFormat = moment(date).format("DD/MM/YYYY HH:mm");
     return dateTimeFormat;
