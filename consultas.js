@@ -42,7 +42,16 @@ const addUsuario = async (nombre, balance) => {
 }
 
 const transfiere = async (emisor, receptor, monto) => {
-    
+    const actualizarCuentaEmisora = {
+        text: `UPDATE cuentas SET balance = balance - $1 WHERE id = $2 RETURNING *`,
+        values: [monto, emisor],
+    };
+
+    const actualizarCuentaReceptora = {
+        text: `UPDATE cuentas SET balance = balance + $1 WHERE id = $2 RETURNING *`,
+        values: [monto, receptor],
+    };
+
 }
 
 module.exports = { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere};
