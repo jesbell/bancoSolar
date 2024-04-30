@@ -1,4 +1,4 @@
-function obtenerFechaHoraActual() {
+function obtenerFechaActual() {
     // Obtener la fecha y hora actuales
     const now = new Date();
 
@@ -17,4 +17,4 @@ function obtenerFechaHoraActual() {
     return fechaHora;
 }
 
-module.exports = { obtenerFechaHoraActual };
+module.exports = { obtenerFechaActual };

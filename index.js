@@ -1,5 +1,6 @@
 const express = require("express");
 const pool = require('./dbConfig');
+const { obtenerFechaActual } = require("./utils");
 const { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere } = require("./consultas");
 const app = express();
 const PORT = 3000;
