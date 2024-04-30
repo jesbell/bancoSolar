@@ -41,5 +41,8 @@ const addUsuario = async (nombre, balance) => {
     
 }
 
+const transfiere = async (emisor, receptor, monto) => {
+    
+}
 
-module.exports = { getUsuarios, editUsuario, delUsuario, addUsuario};
+module.exports = { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere};

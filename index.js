@@ -1,6 +1,6 @@
 const express = require("express");
 const pool = require('./dbConfig');
-const { getUsuarios, editUsuario, delUsuario, addUsuario } = require("./consultas");
+const { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere } = require("./consultas");
 const app = express();
 const PORT = 3000;
 app.use(express.json());
@@ -58,5 +58,16 @@ app.post("/usuario", async (req, res) => {
         res.json(resultado);
     } catch (error) {
         console.error("Error al agregar usuario", error);
+    }
+});
+
+// endpoint de transferencia
+app.post("/transferencia", async (req,res) =>{
+    const { emisor, receptor, monto } = req.body;
+    try {
+        const resultado = await transfiere(emisor, receptor, monto);
+        res.json(resultado);
+    } catch (error) {
+        console.error("Error al realizar transferencia", error);
     }
 });
