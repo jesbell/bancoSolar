@@ -318,9 +318,8 @@
   getTransferencias();
 
   const formatDate = (date) => {
-    const dateFormat = moment(date).format("L");
-    const timeFormat = moment(date).format("LTS");
-    return `${dateFormat} ${timeFormat}`;
+    const dateTimeFormat = moment(date).format("DD/MM/YYYY HH:mm");
+    return dateTimeFormat;
   };
   formatDate();
 </script>
