@@ -1,7 +1,6 @@
 const express = require("express");
 const pool = require('./dbConfig');
-const { obtenerFechaActual } = require("./utils");
-const { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere } = require("./consultas");
+const { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere, getTransferencias } = require("./consultas");
 const app = express();
 const PORT = 3000;
 app.use(express.json());
@@ -66,10 +65,20 @@ app.post("/usuario", async (req, res) => {
 app.post("/transferencia", async (req,res) =>{
     const { emisor, receptor, monto } = req.body;
     try {
-        const fecha = obtenerFechaActual();
         const resultado = await transfiere(emisor, receptor, monto);
         res.json(resultado);
     } catch (error) {
         console.error("Error al realizar transferencia", error);
+    }
+});
+
+// endpoint obtener todas las transferencias
+app.get("/transferencias", async (req,res) => {
+    try {
+        const resultado = await getTransferencias();
+        console.log(resultado);
+        res.json(resultado);
+    } catch (error) {
+        console.error("Error en get usuarios", error);         
     }
 });

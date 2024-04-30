@@ -73,4 +73,15 @@ const transfiere = async (emisor, receptor, monto) => {
 
 }
 
-module.exports = { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere};
+const getTransferencias = async () => {
+    const result = await pool.query({
+        text: `SELECT u.nombre as emisor, u2.nombre as receptor, t.monto , t.fecha 
+        FROM transferencias t
+        JOIN usuarios u ON t.emisor = u.id
+        JOIN usuarios u2 ON t.receptor = u2.id;`,
+        rowMode: "array"        
+    });
+    return result.rows;
+};
+
+module.exports = { getUsuarios, editUsuario, delUsuario, addUsuario, transfiere, getTransferencias};
