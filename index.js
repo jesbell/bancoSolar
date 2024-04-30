@@ -11,6 +11,7 @@ app.listen(PORT, () => {
     console.log(`Servidor en http://localhost:${PORT}`);
 });
 
+// Solicitud GET a la ruta raíz ("/")
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
@@ -81,4 +82,9 @@ app.get("/transferencias", async (req,res) => {
     } catch (error) {
         console.error("Error en get usuarios", error);         
     }
+});
+
+// Ruta genérica 
+app.get("*", (req, res) => {
+    res.send("<center><h1>Esta página no existe... </h1></center>");
 });
