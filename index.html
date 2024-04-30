@@ -270,6 +270,10 @@
     let data = await response.json();
     $(".usuarios").html("");
 
+    // Vaciar los elementos select
+    $("#emisor").empty().append('<option value="">Seleccionar</option>');;
+    $("#receptor").empty().append('<option value="">Seleccionar</option>');;
+
     $.each(data, (i, c) => {
       $(".usuarios").append(`
               <tr>
