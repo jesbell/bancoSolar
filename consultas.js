@@ -29,7 +29,12 @@ const delUsuario = async (id) => {
         return result.rows;
         
     } catch (error) {
-        console.error("Error al actualizar usuario", error); 
+        if (error.code === '23503') { // Código de error para violación de clave
+            throw new Error('No se pudo eliminar el usuario porque tiene transferencias asociadas.');
+        } else {
+            console.error("Error al eliminar usuario", error);
+            throw error;
+        } 
     }
     
 }

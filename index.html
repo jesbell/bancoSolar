@@ -294,10 +294,22 @@
   };
 
   const eliminarUsuario = async (id) => {
-    const response = await fetch(`http://localhost:3000/usuario?id=${id}`, {
+    try {
+      const response = await fetch(`http://localhost:3000/usuario?id=${id}`, {
       method: "DELETE",
-    });
-    getUsuarios();
+      });
+      if (response.ok) { // Verificar si la solicitud fue exitosa
+        const data = await response.json();
+        alert(data.message);
+      } else {
+        alert("Ocurrió un error al intentar eliminar el usuario. Quizás el usuario tiene transferencias asociadas");
+      }
+      getUsuarios();      
+    } catch (error) {
+      console.error("Error al eliminar usuario", error);
+      alert("Ocurrió un error al intentar eliminar el usuario.");
+    }
+    
   };
 
   const getTransferencias = async () => {

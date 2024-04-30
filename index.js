@@ -44,9 +44,9 @@ app.delete("/usuario", async (req, res) => {
     try {
         const { id } = req.query;
         const resultado = await delUsuario(id);
-        res.json(resultado);
+        res.status(200).json({ message: 'Usuario eliminado correctamente.' });
     } catch (error) {
-        console.error("Error al eliminar usuario", error);
+        res.status(500).json({ error: error.message });
     }   
 
 });
@@ -77,7 +77,7 @@ app.post("/transferencia", async (req,res) =>{
 app.get("/transferencias", async (req,res) => {
     try {
         const resultado = await getTransferencias();
-        console.log(resultado);
+        //console.log(resultado);
         res.json(resultado);
     } catch (error) {
         console.error("Error en get usuarios", error);         
