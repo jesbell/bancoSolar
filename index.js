@@ -66,7 +66,8 @@ app.post("/usuario", async (req, res) => {
 app.post("/transferencia", async (req,res) =>{
     const { emisor, receptor, monto } = req.body;
     try {
-        const resultado = await transfiere(emisor, receptor, monto, fecha);
+        const fecha = obtenerFechaActual();
+        const resultado = await transfiere(emisor, receptor, monto);
         res.json(resultado);
     } catch (error) {
         console.error("Error al realizar transferencia", error);

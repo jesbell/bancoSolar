@@ -43,14 +43,33 @@ const addUsuario = async (nombre, balance) => {
 
 const transfiere = async (emisor, receptor, monto) => {
     const actualizarCuentaEmisora = {
-        text: `UPDATE cuentas SET balance = balance - $1 WHERE id = $2 RETURNING *`,
+        text: `UPDATE usuarios SET balance = balance - $1 WHERE id = $2 RETURNING *`,
         values: [monto, emisor],
     };
 
     const actualizarCuentaReceptora = {
-        text: `UPDATE cuentas SET balance = balance + $1 WHERE id = $2 RETURNING *`,
+        text: `UPDATE usuarios SET balance = balance + $1 WHERE id = $2 RETURNING *`,
         values: [monto, receptor],
     };
+
+    const nueva = {
+        text: "INSERT INTO transferencias (emisor, receptor, monto, fecha) values ($1, $2, $3, now()) returning *",
+        values: [emisor, receptor, monto],
+    };
+
+    try {
+        await pool.query("BEGIN");
+        const result = await pool.query(nueva);
+        await pool.query(actualizarCuentaEmisora);
+        await pool.query(actualizarCuentaReceptora);
+        await pool.query("COMMIT");
+        console.log("Transacción realizada con éxito");
+        console.log("Ultima transacción: ", result.rows[0]);
+        return result.rows;
+    } catch (e) {
+        await pool.query("ROLLBACK");
+        throw e;
+    }
 
 }
 
