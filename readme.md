@@ -10,9 +10,9 @@ El Banco Solar acaba de decidir invertir una importante suma de dinero para cont
 
 
 
-| Vista principal | Transferencia |
+| Vista principal | Transferencia Nueva |
 | --- | --- |
-| ![nueva](/assets/agregando.png)| ![Visualización_dos](/assets/editar.png) |
+| ![principal](/assets/vistaPrincipal.png)| ![Transferencia](/assets/transferencia.png) |
 
 La vista principal del proyecto, nos muestra 4 secciones:
 - Dos formularios simples: Agregar usuarios, Realizar transferencia.
