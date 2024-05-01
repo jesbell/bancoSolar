@@ -43,10 +43,15 @@ app.put("/usuario", async (req, res) => {
 app.delete("/usuario", async (req, res) => {
     try {
         const { id } = req.query;
-        const resultado = await delUsuario(id);
+        await delUsuario(id);
         res.status(200).json({ message: 'Usuario eliminado correctamente.' });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        if (error.message) {
+            res.status(400).json({ error: error.message});
+        } else {
+            console.error("Error al eliminar usuario", error);
+            res.status(500).json({ error: 'Ocurrió un error al intentar eliminar el usuario.' });
+        }
     }   
 
 });
