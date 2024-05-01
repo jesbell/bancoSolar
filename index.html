@@ -285,11 +285,14 @@
           monto,
         }),
       });
-      const data = await response.json();
+      if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error);
+      }
       location.reload();
     } catch (e) {
       console.log(e);
-      alert("Algo salió mal..." + e);
+      alert("Algo salió mal: " + e.message);
     }
   });
 

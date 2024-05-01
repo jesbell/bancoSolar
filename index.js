@@ -74,7 +74,7 @@ app.post("/transferencia", async (req,res) =>{
         const resultado = await transfiere(emisor, receptor, monto);
         res.json(resultado);
     } catch (error) {
-        console.error("Error al realizar transferencia", error);
+        res.status(400).json({ error: error.message });
     }
 });
 

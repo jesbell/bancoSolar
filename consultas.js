@@ -78,7 +78,12 @@ const transfiere = async (emisor, receptor, monto) => {
         return result.rows;
     } catch (e) {
         await pool.query("ROLLBACK");
-        throw e;
+        if (e.code === '23514') { 
+            throw new Error('No se puede realizar la transferencia, porque el saldo del emisor es insuficiente');
+        } else {
+            console.error("Error al eliminar usuario", error);
+            throw e;
+        }
     }
 
 }
